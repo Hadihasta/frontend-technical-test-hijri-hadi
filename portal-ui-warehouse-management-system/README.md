@@ -1,9 +1,5 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite +  zod +  tailwind   +  tanstack query + tanstack router
 
 next step : 
 requirement : 
- tailwind  
- tanstack router
- tanstack query
  shadcn ui 
- zod
