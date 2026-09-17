@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Instrument Sans', system-ui, sans-serif;
+
+  --color-blue-light: #e6ecf3;
+  --color-blue-light-hover: #d9e2ed;
+  --color-blue-light-active: #b1c3d9;
+  --color-blue-normal: #043c86;
+  --color-blue-normal-hover: #043679;
+  --color-blue-normal-active: #03306b;
+  --color-blue-dark: #032d65;
+
+  --color-surface-white: #ffffff;
+  --color-surface-white-hover:#FCFDFD;
+  --color-surface-white-active:#F5F7F9;
+  --color-surface-light: #fcfdfd;
+  --color-surface-light-hover:#F5F7F9;
+  --color-surface-light-active:#F0F3F6;
+  --color-surface-normal:#F9FAFB;
+  --color-surface-normal-hover:#F2F4F7;
+  --color-surface-normal-active:#EBEEF2;
+  --color-surface-dark:#F6F8F9;
+  --color-surface-sidebar: #f5f6f7;
+
+  --color-dark-lighter: #b2bbc6;
+  --color-dark-light: #a3adbb;
+  --color-dark-light-active: #909dad;
+  --color-dark-normal: #546881;
+  --color-dark-normal-hover:#47586E;
+  --color-dark-normal-active: #3d4c5e;
+  --color-dark: #1d242d;
+  --color-dark-active: #090b0e;
+
+  --color-success-bg: #eaf5f1;
+  --color-success-fg: #2b6e5c;
+  --color-success-border: #d6ebe4;
+  --color-warning-bg: #f8f3e7;
+  --color-warning-fg: #8b6d2a;
+  --color-warning-border: #eee3c8;
+  --color-danger-bg: #f8eaec;
+  --color-danger-fg: #995062;
+  --color-danger-border: #eed8de;
+
+  --color-page-bg: #eff1f3;
+  --color-border: #e6e9ed;
+  --color-border-strong: #dce1e6;
+
+  --radius-sm: 5px;
+  --radius-md: 7px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-app: 16px;
+
+  --shadow-soft: 0 1px 2px rgba(9, 11, 14, 0.04), 0 6px 18px rgba(9, 11, 14, 0.03);
+  --shadow-app: 0 16px 44px rgba(9, 11, 14, 0.08);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-page-bg font-sans text-[15px] leading-snug text-dark-active antialiased;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  :focus-visible {
+    outline: 3px solid rgba(4, 60, 134, 0.12);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f0f3f6, #f9fafb, #f0f3f6);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}

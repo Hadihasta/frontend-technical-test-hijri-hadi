@@ -1,0 +1,559 @@
+<!-- dont forget to delete hanya untuk note template guidline// - hadi -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ProcureFlow Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-light:#E6ECF3;
+      --blue-light-hover:#D9E2ED;
+      --blue-light-active:#B1C3D9;
+      --blue-normal:#043C86;
+      --blue-normal-hover:#043679;
+      --blue-normal-active:#03306B;
+      --blue-dark:#032D65;
+      --blue-dark-hover:#022450;
+      --blue-dark-active:#021B3C;
+      --blue-darker:#01152F;
+
+      --surface-white:#FFFFFF;
+      --surface-white-hover:#FCFDFD;
+      --surface-white-active:#F5F7F9;
+      --surface-light:#FCFDFD;
+      --surface-light-hover:#F5F7F9;
+      --surface-light-active:#F0F3F6;
+      --surface-normal:#F9FAFB;
+      --surface-normal-hover:#F2F4F7;
+      --surface-normal-active:#EBEEF2;
+      --surface-dark:#F6F8F9;
+
+      --dark-lighter:#B2BBC6;
+      --dark-light:#A3ADBB;
+      --dark-light-active:#909DAD;
+      --dark-normal:#546881;
+      --dark-normal-hover:#47586E;
+      --dark-normal-active:#3D4C5E;
+      --dark:#1D242D;
+      --dark-hover:#151A20;
+      --dark-active:#090B0E;
+
+      --success-bg:#EAF5F1;
+      --success-fg:#2B6E5C;
+      --success-border:#D6EBE4;
+      --warning-bg:#F8F3E7;
+      --warning-fg:#8B6D2A;
+      --warning-border:#EEE3C8;
+      --danger-bg:#F8EAEC;
+      --danger-fg:#995062;
+      --danger-border:#EED8DE;
+
+      --page-bg:#EFF1F3;
+      --border:#E6E9ED;
+      --border-strong:#DCE1E6;
+      --shadow-soft:0 1px 2px rgba(9,11,14,.04),0 6px 18px rgba(9,11,14,.03);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Instrument Sans",system-ui,sans-serif;
+      background:var(--page-bg);
+      color:var(--dark-active);
+      font-size:15px;
+      line-height:1.4;
+    }
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit}
+    :focus-visible{outline:3px solid rgba(4,60,134,.12);outline-offset:2px}
+
+    .app{
+      display:grid;
+      grid-template-columns:240px minmax(0,1fr);
+      width:min(1500px,calc(100vw - 48px));
+      min-height:calc(100vh - 48px);
+      margin:24px auto;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 16px 44px rgba(9,11,14,.08);
+    }
+
+    .sidebar{
+      background:#F5F6F7;
+      border-right:1px solid var(--border);
+      padding:18px 16px;
+      position:sticky;
+      top:0;
+      height:calc(100vh - 48px);
+      overflow:auto;
+    }
+    .brand{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-weight:600}
+    .brand-mark{
+      width:30px;height:30px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--blue-normal);color:#fff;
+      font-size:10px;
+    }
+    .nav-title{
+      margin:18px 8px 6px;
+      color:var(--dark-light-active);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-size:10px;
+      font-weight:500;
+    }
+    .nav-link{
+      width:100%;height:38px;
+      border:0;background:transparent;
+      border-radius:8px;
+      display:flex;align-items:center;gap:9px;
+      padding:0 10px;margin:2px 0;
+      color:var(--dark-normal-active);
+      font-size:13px;text-align:left;
+    }
+    .nav-link:hover,.nav-link.active{background:#E9ECEF;color:var(--dark-active)}
+    .nav-link.active{font-weight:500}
+    .nav-link svg{width:16px;height:16px}
+
+    .main{min-width:0;background:#fff}
+    .topbar{
+      height:60px;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 22px;position:sticky;top:0;background:rgba(255,255,255,.96);z-index:5;
+      backdrop-filter:blur(10px);
+    }
+    .topbar h1{font-size:15px;margin:0;font-weight:500}
+    .topbar span{font-size:11px;color:var(--dark-light-active)}
+    .content{padding:24px}
+
+    .page-head{margin-bottom:24px}
+    .page-head h2{margin:0 0 6px;font-size:30px;line-height:1.15;font-weight:600;letter-spacing:-.4px}
+    .page-head p{margin:0;color:var(--dark-normal);max-width:760px;font-size:13px}
+
+    .section{
+      margin-bottom:28px;
+      scroll-margin-top:90px;
+    }
+    .section-head{
+      display:flex;justify-content:space-between;gap:16px;align-items:flex-end;
+      margin-bottom:12px;
+    }
+    .section-head h3{margin:0;font-size:19px;font-weight:600}
+    .section-head p{margin:3px 0 0;color:var(--dark-normal);font-size:12px}
+    .panel{
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .panel-body{padding:18px}
+    .grid{display:grid;gap:12px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+
+    .token-card{
+      border:1px solid var(--border);
+      border-radius:10px;
+      overflow:hidden;background:#fff;
+    }
+    .swatch{height:78px;border-bottom:1px solid var(--border)}
+    .token-meta{padding:10px 11px}
+    .token-name{font-size:12px;font-weight:500}
+    .token-value{font-size:10px;color:var(--dark-light-active);margin-top:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+    .type-row{
+      display:grid;grid-template-columns:120px 1fr;
+      gap:20px;align-items:baseline;
+      padding:14px 0;border-bottom:1px solid var(--border);
+    }
+    .type-row:last-child{border-bottom:0}
+    .type-meta{font-size:10px;color:var(--dark-light-active)}
+    .t72{font-size:72px;line-height:1.05;font-weight:400;letter-spacing:-1.4px}
+    .t58{font-size:58px;line-height:1.08;font-weight:400;letter-spacing:-1.1px}
+    .t46{font-size:46px;line-height:1.1;font-weight:500;letter-spacing:-.8px}
+    .t37{font-size:37px;line-height:1.15;font-weight:500;letter-spacing:-.5px}
+    .t30{font-size:30px;line-height:1.15;font-weight:600;letter-spacing:-.4px}
+    .t24{font-size:24px;line-height:1.2;font-weight:500}
+    .t19{font-size:19px;line-height:1.25;font-weight:500}
+    .t15{font-size:15px;line-height:1.4;font-weight:400}
+    .t12{font-size:12px;line-height:1.4;font-weight:400}
+
+    .space-item{display:flex;align-items:center;gap:12px}
+    .space-demo{height:18px;background:var(--blue-light-active);border-radius:4px}
+    .space-label{min-width:80px;font-size:11px}
+    .radius-demo{
+      height:68px;background:var(--surface-normal);
+      border:1px solid var(--border-strong);
+      display:grid;place-items:center;
+      font-size:11px;color:var(--dark-normal);
+    }
+
+    .button-row,.inline-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .btn{
+      min-height:34px;height:34px;
+      padding:0 12px;border-radius:7px;
+      background:#fff;color:var(--dark-normal-active);
+      border:1px solid var(--border-strong);
+      font-size:11px;font-weight:500;
+      display:inline-flex;align-items:center;gap:7px;
+    }
+    .btn:hover{background:var(--surface-white-hover);border-color:#D2D8DF}
+    .btn.primary{background:var(--blue-normal);color:#fff;border-color:var(--blue-normal)}
+    .btn.primary:hover{background:var(--blue-normal-hover)}
+    .btn.primary:active{background:var(--blue-normal-active)}
+    .btn.ghost{border-color:transparent;background:transparent}
+    .btn.ghost:hover{background:var(--surface-normal-hover)}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn.icon{width:34px;padding:0;justify-content:center}
+    .btn svg{width:14px;height:14px}
+
+    .field{display:flex;flex-direction:column;gap:5px}
+    .field label{font-size:11px;font-weight:500}
+    .field small{font-size:10px;color:var(--dark-light-active)}
+    .input,.select,.textarea{
+      width:100%;
+      border:1px solid var(--border-strong);
+      border-radius:7px;background:#fff;color:var(--dark-active);
+      font-size:11px;
+    }
+    .input,.select{height:34px;padding:0 10px}
+    .textarea{min-height:86px;padding:10px;resize:vertical}
+    .input::placeholder,.textarea::placeholder{color:var(--dark-light-active)}
+    .input.error{border-color:#D6AAB5;background:#FFFDFD}
+    .error-text{font-size:10px;color:#995062}
+
+    .badge{
+      display:inline-flex;align-items:center;
+      padding:3px 6px;border-radius:5px;
+      font-size:9.5px;font-weight:500;border:1px solid transparent;
+    }
+    .badge.draft{background:var(--surface-normal);color:var(--dark-normal);border-color:var(--border)}
+    .badge.submitted,.badge.ordered{background:var(--blue-light);color:var(--blue-normal);border-color:#D8E2EF}
+    .badge.approved,.badge.received{background:var(--success-bg);color:var(--success-fg);border-color:var(--success-border)}
+    .badge.partial{background:var(--warning-bg);color:var(--warning-fg);border-color:var(--warning-border)}
+    .badge.rejected{background:var(--danger-bg);color:var(--danger-fg);border-color:var(--danger-border)}
+
+    .summary-card{
+      border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff;
+    }
+    .summary-label{font-size:11px;color:var(--dark-normal)}
+    .summary-value{font-size:24px;font-weight:600;margin-top:8px}
+    .summary-help{font-size:10px;color:var(--dark-light-active);margin-top:4px}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 11px;border-bottom:1px solid var(--border);text-align:left;font-size:11px;white-space:nowrap}
+    th{background:#FBFCFD;color:var(--dark-normal);font-weight:500}
+    tbody tr:hover{background:var(--surface-white-hover)}
+    tbody tr:last-child td{border-bottom:0}
+
+    .state{
+      min-height:180px;display:grid;place-items:center;text-align:center;padding:24px;
+    }
+    .state-icon{
+      width:38px;height:38px;border:1px solid var(--border);border-radius:9px;
+      display:grid;place-items:center;margin:0 auto 9px;background:var(--surface-normal);
+    }
+    .state h4{margin:0 0 4px;font-size:13px;font-weight:500}
+    .state p{margin:0 0 10px;color:var(--dark-normal);font-size:10px}
+    .skeleton{height:34px;border-radius:6px;background:linear-gradient(90deg,#F0F3F6,#F9FAFB,#F0F3F6);background-size:200% 100%;animation:shimmer 1.2s infinite;margin:8px 0}
+    @keyframes shimmer{to{background-position:-200% 0}}
+
+    .icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+    .icon-card{border:1px solid var(--border);border-radius:8px;min-height:86px;display:grid;place-items:center;text-align:center;padding:10px}
+    .icon-card svg{width:20px;height:20px}
+    .icon-card span{display:block;font-size:9px;color:var(--dark-normal);margin-top:6px}
+
+    .modal-demo{
+      border:1px solid var(--border);
+      border-radius:12px;
+      box-shadow:0 18px 40px rgba(9,11,14,.12);
+      max-width:520px;background:#fff;
+    }
+    .modal-head,.modal-foot{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .modal-foot{border-top:1px solid var(--border);border-bottom:0;justify-content:flex-end;gap:8px}
+    .modal-body{padding:14px}
+    .modal-head strong{font-size:14px}
+
+    .toast-demo{
+      display:inline-flex;background:var(--dark-active);color:#fff;
+      padding:10px 12px;border-radius:8px;font-size:11px;
+      box-shadow:0 10px 24px rgba(9,11,14,.16)
+    }
+
+    @media(max-width:1000px){
+      .grid-4,.grid-5{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .icon-grid{grid-template-columns:repeat(4,1fr)}
+    }
+    @media(max-width:780px){
+      .app{width:100%;margin:0;border:0;border-radius:0;grid-template-columns:1fr}
+      .sidebar{display:none}
+      .content{padding:16px}
+      .grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}
+      .type-row{grid-template-columns:1fr}
+      .t72{font-size:46px}.t58{font-size:37px}.t46{font-size:30px}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">PF</div>ProcureFlow DS</div>
+
+    <div class="nav-title">Foundations</div>
+    <button class="nav-link active" onclick="jump('colors',this)"><span class="ico" data-i="palette"></span>Colors</button>
+    <button class="nav-link" onclick="jump('typography',this)"><span class="ico" data-i="type"></span>Typography</button>
+    <button class="nav-link" onclick="jump('spacing',this)"><span class="ico" data-i="spacing"></span>Spacing & Radius</button>
+
+    <div class="nav-title">Components</div>
+    <button class="nav-link" onclick="jump('buttons',this)"><span class="ico" data-i="cursor"></span>Buttons</button>
+    <button class="nav-link" onclick="jump('forms',this)"><span class="ico" data-i="form"></span>Forms</button>
+    <button class="nav-link" onclick="jump('badges',this)"><span class="ico" data-i="tag"></span>Status Badges</button>
+    <button class="nav-link" onclick="jump('cards',this)"><span class="ico" data-i="card"></span>Cards</button>
+    <button class="nav-link" onclick="jump('table',this)"><span class="ico" data-i="table"></span>Data Table</button>
+
+    <div class="nav-title">Patterns</div>
+    <button class="nav-link" onclick="jump('states',this)"><span class="ico" data-i="state"></span>States</button>
+    <button class="nav-link" onclick="jump('overlay',this)"><span class="ico" data-i="modal"></span>Overlay</button>
+    <button class="nav-link" onclick="jump('icons',this)"><span class="ico" data-i="icons"></span>Iconography</button>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <h1>Design System</h1>
+      <span>Inventory Procurement · v1.0</span>
+    </div>
+
+    <div class="content">
+      <header class="page-head">
+        <h2>ProcureFlow Design System</h2>
+        <p>Implementation-focused UI system for the procurement technical test. Built with Instrument Sans, the approved blue and neutral scales, compact enterprise density, and a Streamline-style line icon language.</p>
+      </header>
+
+      <section class="section" id="colors">
+        <div class="section-head">
+          <div><h3>Colors</h3><p>Primitive palette used to build semantic roles across the application.</p></div>
+        </div>
+
+        <div class="panel"><div class="panel-body">
+          <h4 style="font-size:12px;margin:0 0 10px">Blue</h4>
+          <div class="grid grid-5">
+            <div class="token-card"><div class="swatch" style="background:#E6ECF3"></div><div class="token-meta"><div class="token-name">Blue / Light</div><div class="token-value">#E6ECF3</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#B1C3D9"></div><div class="token-meta"><div class="token-name">Blue / Light Active</div><div class="token-value">#B1C3D9</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#043C86"></div><div class="token-meta"><div class="token-name">Blue / Normal</div><div class="token-value">#043C86</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#032D65"></div><div class="token-meta"><div class="token-name">Blue / Dark</div><div class="token-value">#032D65</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#01152F"></div><div class="token-meta"><div class="token-name">Blue / Darker</div><div class="token-value">#01152F</div></div></div>
+          </div>
+
+          <h4 style="font-size:12px;margin:18px 0 10px">Surface</h4>
+          <div class="grid grid-5">
+            <div class="token-card"><div class="swatch" style="background:#FFFFFF"></div><div class="token-meta"><div class="token-name">Surface / White</div><div class="token-value">#FFFFFF</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#FCFDFD"></div><div class="token-meta"><div class="token-name">Surface / Light</div><div class="token-value">#FCFDFD</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#F5F7F9"></div><div class="token-meta"><div class="token-name">Surface / Active</div><div class="token-value">#F5F7F9</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#F9FAFB"></div><div class="token-meta"><div class="token-name">Surface / Normal</div><div class="token-value">#F9FAFB</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#EBEEF2"></div><div class="token-meta"><div class="token-name">Surface / Normal Active</div><div class="token-value">#EBEEF2</div></div></div>
+          </div>
+
+          <h4 style="font-size:12px;margin:18px 0 10px">Dark</h4>
+          <div class="grid grid-5">
+            <div class="token-card"><div class="swatch" style="background:#B2BBC6"></div><div class="token-meta"><div class="token-name">Dark / Lighter</div><div class="token-value">#B2BBC6</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#909DAD"></div><div class="token-meta"><div class="token-name">Dark / Light Active</div><div class="token-value">#909DAD</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#546881"></div><div class="token-meta"><div class="token-name">Dark / Normal</div><div class="token-value">#546881</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#1D242D"></div><div class="token-meta"><div class="token-name">Dark</div><div class="token-value">#1D242D</div></div></div>
+            <div class="token-card"><div class="swatch" style="background:#090B0E"></div><div class="token-meta"><div class="token-name">Dark / Active</div><div class="token-value">#090B0E</div></div></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="section" id="typography">
+        <div class="section-head"><div><h3>Typography</h3><p>Instrument Sans. Use 400 Regular, 500 Medium, and 600 SemiBold.</p></div></div>
+        <div class="panel"><div class="panel-body">
+          <div class="type-row"><div class="type-meta">72px · Regular</div><div class="t72">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">58px · Regular</div><div class="t58">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">46px · Medium</div><div class="t46">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">37px · Medium</div><div class="t37">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">30px · SemiBold</div><div class="t30">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">24px · Medium</div><div class="t24">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">19px · Medium</div><div class="t19">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">15px · Regular</div><div class="t15">Evindo Global Putra</div></div>
+          <div class="type-row"><div class="type-meta">12px · Regular</div><div class="t12">Evindo Global Putra</div></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="spacing">
+        <div class="section-head"><div><h3>Spacing & Radius</h3><p>Compact enterprise rhythm based on 4px and 8px increments.</p></div></div>
+        <div class="grid grid-2">
+          <div class="panel"><div class="panel-body">
+            <div class="space-item"><div class="space-label">space-1 · 4px</div><div class="space-demo" style="width:4px"></div></div>
+            <div class="space-item"><div class="space-label">space-2 · 8px</div><div class="space-demo" style="width:8px"></div></div>
+            <div class="space-item"><div class="space-label">space-3 · 12px</div><div class="space-demo" style="width:12px"></div></div>
+            <div class="space-item"><div class="space-label">space-4 · 16px</div><div class="space-demo" style="width:16px"></div></div>
+            <div class="space-item"><div class="space-label">space-6 · 24px</div><div class="space-demo" style="width:24px"></div></div>
+            <div class="space-item"><div class="space-label">space-8 · 32px</div><div class="space-demo" style="width:32px"></div></div>
+          </div></div>
+          <div class="panel"><div class="panel-body grid grid-4">
+            <div class="radius-demo" style="border-radius:4px">4px</div>
+            <div class="radius-demo" style="border-radius:6px">6px</div>
+            <div class="radius-demo" style="border-radius:8px">8px</div>
+            <div class="radius-demo" style="border-radius:10px">10px</div>
+          </div></div>
+        </div>
+      </section>
+
+      <section class="section" id="buttons">
+        <div class="section-head"><div><h3>Buttons</h3><p>Primary, secondary, ghost, icon, loading, and disabled states.</p></div></div>
+        <div class="panel"><div class="panel-body">
+          <div class="button-row">
+            <button class="btn primary"><span class="ico" data-i="plus"></span>Create Purchase Request</button>
+            <button class="btn"><span class="ico" data-i="download"></span>Export</button>
+            <button class="btn ghost">Cancel</button>
+            <button class="btn icon" aria-label="More"><span class="ico" data-i="more"></span></button>
+            <button class="btn primary" disabled>Submitting...</button>
+            <button class="btn" disabled>Disabled</button>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="section" id="forms">
+        <div class="section-head"><div><h3>Form Components</h3><p>Inputs must support labels, helper text, validation, disabled and focused states.</p></div></div>
+        <div class="panel"><div class="panel-body grid grid-2">
+          <div class="field"><label>Warehouse</label><select class="select"><option>Main Warehouse</option><option>Jakarta Hub</option></select><small>Select the receiving warehouse.</small></div>
+          <div class="field"><label>Product</label><input class="input" value="Industrial Filter A"></div>
+          <div class="field"><label>Quantity</label><input class="input" type="number" value="100"></div>
+          <div class="field"><label>Requested Date</label><input class="input" type="date" value="2026-09-10"></div>
+          <div class="field"><label>Rejection Reason</label><input class="input error" value=""><div class="error-text">Rejection reason is required.</div></div>
+          <div class="field"><label>Disabled</label><input class="input" value="Generated automatically" disabled></div>
+          <div class="field full" style="grid-column:1/-1"><label>Notes</label><textarea class="textarea" placeholder="Add request notes..."></textarea></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="badges">
+        <div class="section-head"><div><h3>Status Badges</h3><p>Status must always include readable text. Color is secondary.</p></div></div>
+        <div class="panel"><div class="panel-body inline-row">
+          <span class="badge draft">Draft</span>
+          <span class="badge submitted">Submitted</span>
+          <span class="badge approved">Approved</span>
+          <span class="badge rejected">Rejected</span>
+          <span class="badge ordered">Ordered</span>
+          <span class="badge partial">Partially Received</span>
+          <span class="badge received">Received</span>
+        </div></div>
+      </section>
+
+      <section class="section" id="cards">
+        <div class="section-head"><div><h3>Cards</h3><p>Use cards only where grouping improves scanning or task clarity.</p></div></div>
+        <div class="grid grid-4">
+          <div class="summary-card"><div class="summary-label">Total Purchase Requests</div><div class="summary-value">48</div><div class="summary-help">+6 this month</div></div>
+          <div class="summary-card"><div class="summary-label">Waiting for Approval</div><div class="summary-value">8</div><div class="summary-help">Requires manager action</div></div>
+          <div class="summary-card"><div class="summary-label">Active Purchase Orders</div><div class="summary-value">21</div><div class="summary-help">12 due this week</div></div>
+          <div class="summary-card"><div class="summary-label">Partially Received</div><div class="summary-value">5</div><div class="summary-help">Receiving in progress</div></div>
+        </div>
+      </section>
+
+      <section class="section" id="table">
+        <div class="section-head"><div><h3>Data Table</h3><p>Primary list pattern for Purchase Requests, Purchase Orders, and Inventory.</p></div></div>
+        <div class="panel">
+          <table>
+            <thead><tr><th>Request ID</th><th>Requester</th><th>Warehouse</th><th>Items</th><th>Requested Date</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>PR-2026-0048</td><td>Sarah Lim</td><td>Main Warehouse</td><td>4</td><td>10 Sep 2026</td><td><span class="badge submitted">Submitted</span></td><td><button class="btn">Review</button></td></tr>
+              <tr><td>PR-2026-0047</td><td>Daniel Wong</td><td>Jakarta Hub</td><td>2</td><td>09 Sep 2026</td><td><span class="badge approved">Approved</span></td><td><button class="btn">Open</button></td></tr>
+              <tr><td>PR-2026-0046</td><td>Aditya Putra</td><td>Main Warehouse</td><td>6</td><td>09 Sep 2026</td><td><span class="badge draft">Draft</span></td><td><button class="btn">Edit</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="states">
+        <div class="section-head"><div><h3>Loading, Empty & Error States</h3><p>These are part of the design system, not improvised per page.</p></div></div>
+        <div class="grid grid-3">
+          <div class="panel"><div class="panel-body"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></div>
+          <div class="panel"><div class="state"><div><div class="state-icon"><span class="ico" data-i="document"></span></div><h4>No Purchase Requests yet</h4><p>Create your first request to start requesting stock.</p><button class="btn primary">Create Request</button></div></div></div>
+          <div class="panel"><div class="state"><div><div class="state-icon"><span class="ico" data-i="alert"></span></div><h4>Unable to load requests</h4><p>Something went wrong while retrieving data.</p><button class="btn">Try Again</button></div></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="overlay">
+        <div class="section-head"><div><h3>Dialog & Toast</h3><p>Confirmation patterns for submit, approve, reject, receive, and destructive actions.</p></div></div>
+        <div class="grid grid-2">
+          <div class="modal-demo">
+            <div class="modal-head"><strong>Approve Purchase Request?</strong><button class="btn icon"><span class="ico" data-i="close"></span></button></div>
+            <div class="modal-body"><p style="margin:0;color:var(--dark-normal);font-size:12px">PR-2026-0048 will move to Approved and become available for Purchase Order creation.</p></div>
+            <div class="modal-foot"><button class="btn">Cancel</button><button class="btn primary">Approve</button></div>
+          </div>
+          <div class="panel"><div class="panel-body"><div class="toast-demo">Purchase Request submitted successfully.</div></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="icons">
+        <div class="section-head"><div><h3>Iconography</h3><p>Consistent line icons with 1.7px stroke and rounded terminals, aligned to the current Streamline-style language.</p></div></div>
+        <div class="panel"><div class="panel-body icon-grid">
+          <div class="icon-card"><div><span class="ico" data-i="home"></span><span>Dashboard</span></div></div>
+          <div class="icon-card"><div><span class="ico" data-i="document"></span><span>Request</span></div></div>
+          <div class="icon-card"><div><span class="ico" data-i="cart"></span><span>Order</span></div></div>
+          <div class="icon-card"><div><span class="ico" data-i="package"></span><span>Inventory</span></div></div>
+          <div class="icon-card"><div><span class="ico" data-i="check"></span><span>Receipt</span></div></div>
+          <div class="icon-card"><div><span class="ico" data-i="chart"></span><span>Reports</span></div></div>
+          <div class="icon-card"><div><span class="ico" data-i="search"></span><span>Search</span></div></div>
+          <div class="icon-card"><div><span class="ico" data-i="settings"></span><span>Settings</span></div></div>
+        </div></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+const ICONS={
+home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7v9a1.5 1.5 0 0 1-1.5 1.5h-5v-6H10v6H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg>',
+document:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h8l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5z"/><path d="M14 3.5V8h4M8.5 12h7M8.5 15.5h7"/></svg>',
+cart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5h2l1.8 9.2a2 2 0 0 0 2 1.6h7.5a2 2 0 0 0 2-1.6L20.5 8H6.2"/><circle cx="9.5" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>',
+package:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m4 7 8-4 8 4-8 4z"/><path d="m4 7 8 4 8-4v10l-8 4-8-4z"/><path d="M12 11v10"/></svg>',
+check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.6L16.5 9"/></svg>',
+chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>',
+settings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8.5"/></svg>',
+plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+download:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M5 20h14"/></svg>',
+more:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>',
+close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>',
+alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16.5h.01"/></svg>',
+palette:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5c-3.5 0-6.5 2.4-6.5 5.6 0 2.8 2.2 4 4.2 4h1.2c1.1 0 1.6.7 1.2 1.6-.6 1.5.2 3 1.8 3.5"/></svg>',
+type:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 5h14M12 5v14M8.5 19h7"/></svg>',
+spacing:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 17h16M7 4v6M17 14v6"/></svg>',
+cursor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3.5 18 12l-5.5 1.3L10 19z"/></svg>',
+form:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M7 8h10M7 12h7M7 16h4"/></svg>',
+tag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M4 12V5h7l9 9-6 6z"/><circle cx="8" cy="8" r="1"/></svg>',
+card:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 9h17"/></svg>',
+table:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9h17M9 9v11M15 9v11"/></svg>',
+state:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12h7"/></svg>',
+modal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16"/></svg>',
+icons:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="8" r="3"/><rect x="13" y="5" width="6" height="6" rx="1"/><path d="M5 18h6M16 14v6"/></svg>'
+};
+
+document.querySelectorAll('.ico').forEach(el=>{
+  const name=el.dataset.i;
+  el.innerHTML=ICONS[name]||ICONS.document;
+  el.style.display='inline-flex';
+  el.style.width='16px';
+  el.style.height='16px';
+  const svg=el.querySelector('svg');
+  if(svg){svg.style.width='100%';svg.style.height='100%'}
+});
+
+function jump(id,btn){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
